@@ -60,4 +60,79 @@ PART 4
         2.3 history -> jika sudah commit masuk ke history
         2.4 {2.2 dan 2.3} disimpan di .git
     3. checkout kebali kekeadaan sebelum repo di edit
+        3.1 cara checkout: git checkout {5 angka hash} {opsional: nama file}
          
+PART 5 dan 6
+1 Belajar branch dan merge di GIT
+2. git status
+3. git commit -am
+4. git checkout <nama branch>
+5. git branch dan git branch <nama branch>
+6. terdapat 2 jenis merge
+    6.1 fast forward -> commit berada di jalur langsung (satu jalur)
+    6.2 three-way merge -> commit ketika tidak ad direct path (jalur langsung), jadi akan membuat commit baru kemudia baru dilakukan merge
+7. merge commit = git merge <nama branch>
+8. menghapus branch = git branch -d <nama branch>, jika sebuah branch blm di merge tidak bisa didelete dengna -d, tapi bisa dengan -D (anggap lah seperti force delete)
+9. untuk cek branch mana yang telah di merge bisa dengan command git branch --merged
+
+
+PART 7
+1. Untuk lihat graph bisa dengan "git log --all --decorate --oneline --graph", bisa pakai alias untuk singkat
+2. jika kita menemukan conflict kita perlu resolve secara manual dengan memilih code yang ingin digunakan. 
+3. Terdapat kasus khusus dimana jika kita commit ke commit sebelumnya dengan "git checkout {7 digit hash} dan membuat branch dari posisi saat itu, head tidak akan ttp berada pada master, untuk memindahkan head bisa dengan "git checkout {nama branch}". Sebutan ini disebut detach head dimana head terlepas dari branch (ketika ingin mundur dari sebuah commit)
+
+
+PART 8 GIT REMOTE
+1. ketika kita sudah melakukan clone dengan git clone {link}, repo local kita terhubung dengan yg di remote sehinga jika terdapat commit baru repo local akan 1 ahead dari remote sehingga perlu dilakukan push.
+2. git push -> untuk push ke repo remote
+3. git config --list -> untuk cek informasi terkait user.name, user.email, dll
+4. git config --local / --global (untuk konfigurasi) {contoh user.name "nama"}
+5. git remote -> untuk melihat remote yang ada
+6. git remote -v -> untuk melihat root dari remote (push dan fetch) #bis coba di cari lebih dalam
+7. git fetch -> untuk cek commit di remote sudah sampai mana, sama tidak degan di local
+
+jika ada kasus dimana remote dan local membuat branch, solusinya
+1. cek dengan get fetch
+2. lalu jika memang ada lakukan git pull dulu
+3. selesaikan conflict
+4. lalu cek git status -> git add . -> git commit -m "nama" -> git push.
+
+
+PART 9 WEB HOSTING GRATIS DGN GITHUB PAGES (hosting web statis)
+1. nama repo harus {nama akun}.github.io
+2. kemudian tinggal lakukan initial commit seperti pada biasanya
+3. setelah menghosting kita bisa membuat website utk setiap repo dengan catatan nama nya akan berada di bawah website hosting utama. serperti "namawebsite.github.io/contoh"
+4. cara hostingnya ke settings -> bagian github pages lalu milih branch,jika tidak siap tampil bisa pakai theme, atau buat custom domain
+
+
+PART 10 Multiple remote
+1. Contoh kasus dari multiple remote adalah ketika kita melakukan fork dari repo pihak lain, kemudian kita mengclone jg secara lokal. Karena repo lokal memiliki remote di github pribadi maka tidak ada hubungan apapun dengan original repo jika terdapat perubahan.
+Oleh sebab itu jika kita ingin terus update dengan apa yg terjadi maka perlu membuat remote baru.
+2. Jika pada original repo terdapat perubahan kita perlu "git fetch {nama remote original yang telah dibuat} -> jika repo ori berada di depan bisa lakukan "git merge {nama repo}/{nama branch} -> kemudian akan merge tetapi repo di GITHUB tidak berada pada commit yang sama, untuk itu perlu lakukan "git push" atau "git push -u origin master"
+
+
+PART 11 Remote Branch
+1. Saat ingin melakukan perubahan sebaiknya jangan di branch master, melainkan membut branch baru. Sehingga saat melakukan pull request yang dikirim adalam branch baru bukan master.
+2. biasakan git status untuk terbiasa.
+3. Jika kita sudah melakukan pull request di GITHUB tinggal tunggu di merge oleh pemilik repo. Jika di setujui bisa melakukan melakukan "git fetch" dan "git merge {nama remote}/{nama branch}. kemudian tinggal lakukan push ke origin master repo dan hapus branch yang tidak diperlukan.
+
+
+PART 12 .GITIGNORE
+1. jika ingin terdapat file yang tidak kita commit.
+2. bisa membuat file ".gitignore" di dalam repo
+3. tinggal daftarkan di ".gitignore"
+4. bisa file, folder, atau semua file yg tertentu seperti *.exe
+5. bisa pakai gitignore.io
+
+PART 13 REBASE 
+1. Cara memilih git workflow
+2. umum menggunakan merge 
+3. three-way merge tidak masalah jika projeknya kecil dan tim sedikit, sebaliknya jika banyak maka akan memusingkan (ribet) susah di tract.
+4. Rebase itu apa, simplenya ketika pada sebuah kasus branch master melakukan commit, jika pakai merge maka akan terjadi three-way merge, jika pakai rebase maka branch yg bukan master akan dipindahkan ke posisi commit terbaru dari master
+5. cara pakai rebase "git rebase {nama branch}", pertama branch cabang rebase ke master, kemudian lakukan kebalkan karean master ketinggalan dan lakukan push
+
+
+PART 14 GIT & Web hosting
+1. biasa kalau mau simpan web hosting secara local bisa menggunakan control pannel hosting FTP client / Cpanel. Manual jika ada perubahan edit ulang lalu kirim ulang
+2. Sekarang bisa pakai GIT dan Repo. Jadi bisa tract commit
+3. Bisa upload Repo dari github. Web hosting pull dari github, jika ada perubahan push ke repo github dan web hosting pull dari github.
